@@ -1,0 +1,8 @@
+{
+  "name": "skills-gateway",
+  "command": "node",
+  "args": [
+    "D:\\ai\\program\\skills-mcp\\server.js"
+  ],
+  "cwd": "D:\\ai\\program\\skills-mcp"
+}

@@ -1,0 +1,9 @@
+{
+  "apiVersion": 1,
+  "id": "obsidian-notes-creator",
+  "name": "Obsidian Notes Creator",
+  "version": "1.0.0",
+  "description": "专业双链考点学习笔记生成器与 Obsidian 知识库全功能工具箱（全景图谱Mermaid/深度解析/辨析对比表/复习题/7天落地清单/知识库搜索与管理）。",
+  "author": "昔涟",
+  "entry": "index.cjs"
+}

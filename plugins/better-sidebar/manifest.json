@@ -1,0 +1,11 @@
+{
+  "apiVersion": 1,
+  "id": "better-sidebar",
+  "name": "侧栏工作台 · Better Sidebar",
+  "version": "2.2.0",
+  "description": "把 DSH-better-sidebar 的核心能力搬进 Cyrene 聊天窗：右侧内嵌侧栏 = 文件树 + 代码编辑器 + 管道终端 + Git 面板；右侧常驻「工作台」按钮（单击切换 / 右键切宽度档）、快捷键 Ctrl+Shift+B；宽度两档（窄 30% / 宽 45%）随窗口自适应；昔涟可以主动把文件推到你眼前",
+  "author": "Cyrene × 昔涟",
+  "entry": "index.cjs",
+  "icon": "icon.svg",
+  "defaultEnabled": false
+}

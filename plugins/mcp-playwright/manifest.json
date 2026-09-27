@@ -1,0 +1,9 @@
+{
+  "apiVersion": 1,
+  "id": "mcp-playwright",
+  "name": "Playwright 浏览器",
+  "version": "1.0.0",
+  "description": "Playwright 浏览器自动化 MCP（导航/点击/截图/取快照）。需要真实浏览器操作网页时启用。",
+  "author": "昔涟",
+  "entry": "index.cjs"
+}

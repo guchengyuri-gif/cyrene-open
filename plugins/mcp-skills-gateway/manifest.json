@@ -1,0 +1,9 @@
+{
+  "apiVersion": 1,
+  "id": "mcp-skills-gateway",
+  "name": "skills-gateway",
+  "version": "1.0.0",
+  "description": "本地技能库网关 MCP（skills-hub / 用户定制技能的检索与运行）。需要按技能手册干活时启用。",
+  "author": "昔涟",
+  "entry": "index.cjs"
+}

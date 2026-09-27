@@ -1,0 +1,10 @@
+{
+  "apiVersion": 1,
+  "id": "vision-hub",
+  "name": "视觉模型集合",
+  "version": "1.0.0",
+  "description": "接入多个 OpenAI 兼容视觉模型：手动指定 profile 或自动轮转；支持列档/增删改/健康检查/默认兜底。",
+  "author": "Cyrene",
+  "entry": "index.cjs",
+  "defaultEnabled": false
+}

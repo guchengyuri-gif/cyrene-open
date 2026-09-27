@@ -1,0 +1,11 @@
+{
+  "apiVersion": 1,
+  "id": "video-podcast-maker",
+  "name": "Video Podcast Maker (视频播客生成器)",
+  "version": "5.3.0",
+  "description": "基于 Agents365-ai/video-podcast-maker 的主题驱动自动化视频播客生成插件。流水线：选题研究 → 脚本撰写 → 本地 TTS(edge/azure) → Remotion 渲染 → MP4+BGM，支持 B站/YouTube/小红书/抖音/微信视频号，4K 输出与中英双语。",
+  "author": "Agents365-ai / 昔涟适配",
+  "entry": "index.cjs",
+  "icon": "icon.svg",
+  "defaultEnabled": false
+}

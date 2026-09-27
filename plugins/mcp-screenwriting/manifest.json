@@ -1,0 +1,9 @@
+{
+  "apiVersion": 1,
+  "id": "mcp-screenwriting",
+  "name": "Screenwriting 编剧技能库",
+  "version": "1.0.0",
+  "description": "影视/戏剧编剧技能库 MCP（结构/人物/对白）。写剧本、做剧本诊断时启用。",
+  "author": "昔涟",
+  "entry": "index.cjs"
+}

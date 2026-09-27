@@ -1,0 +1,8 @@
+{
+  "name": "Screenwriting Skills (编剧技能库)",
+  "command": "node",
+  "args": [
+    "D:\\ai\\program\\mcp-servers\\screenwriting\\index.mjs"
+  ],
+  "cwd": "D:\\ai\\program\\mcp-servers\\screenwriting"
+}

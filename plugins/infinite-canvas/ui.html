@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>无限画布</title>
+<style>
+  :root {
+    --bg: #17121d;
+    --bar: #1f1a27;
+    --pink: #f7a8cf;
+    --pink-soft: #ffd9e8;
+    --purple: #c98fe0;
+    --text: #f3eaf5;
+    --muted: #a493b0;
+    --line: rgba(247, 168, 207, 0.18);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; height: 100%;
+    background: var(--bg); color: var(--text);
+    font-family: "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+    font-size: 13px; overflow: hidden;
+  }
+  #app { display: flex; flex-direction: column; height: 100%; }
+
+  header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 12px; background: var(--bar);
+    border-bottom: 1px solid var(--line);
+    -webkit-app-region: drag;
+  }
+  header .dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--pink); box-shadow: 0 0 8px var(--pink);
+    flex: none;
+  }
+  header .title { font-weight: 600; letter-spacing: .4px; }
+  header .status { color: var(--muted); font-size: 12px; }
+  header .spacer { flex: 1; }
+  button, .chip {
+    -webkit-app-region: no-drag;
+    border: 1px solid var(--line);
+    background: rgba(247, 168, 207, 0.08);
+    color: var(--text);
+    padding: 5px 11px; border-radius: 8px;
+    font-size: 12px; cursor: pointer;
+    font-family: inherit; transition: .15s;
+  }
+  button:hover { background: rgba(247, 168, 207, 0.2); border-color: var(--pink); }
+  button.primary {
+    background: linear-gradient(135deg, var(--pink-soft), var(--pink));
+    color: #3a1f2e; border: none; font-weight: 600;
+  }
+  button.primary:hover { filter: brightness(1.06); }
+
+  .cfg {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 12px; background: #1b1622;
+    border-bottom: 1px solid var(--line);
+    flex-wrap: wrap;
+  }
+  .cfg label { color: var(--muted); font-size: 12px; white-space: nowrap; }
+  .cfg input {
+    background: #120e17; color: var(--text);
+    border: 1px solid var(--line); border-radius: 7px;
+    padding: 5px 9px; font-size: 12px; font-family: inherit;
+    outline: none;
+  }
+  .cfg input:focus { border-color: var(--pink); }
+  #baseUrl { width: 230px; }
+  #apiKey { width: 300px; }
+
+  #frame { flex: 1; position: relative; background: #0f0b14; }
+  webview { width: 100%; height: 100%; border: 0; display: flex; }
+
+  .overlay {
+    position: absolute; inset: 0;
+    display: none; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 14px; text-align: center; padding: 30px;
+    background: radial-gradient(circle at 50% 40%, #2a1f35, #0f0b14 70%);
+  }
+  .overlay.show { display: flex; }
+  .overlay h2 { margin: 0; font-size: 17px; font-weight: 600; }
+  .overlay p { margin: 0; color: var(--muted); line-height: 1.7; max-width: 460px; }
+
+  .toast {
+    position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%) translateY(20px);
+    background: rgba(247, 168, 207, 0.95); color: #3a1f2e;
+    padding: 8px 18px; border-radius: 10px; font-weight: 600;
+    opacity: 0; pointer-events: none; transition: .25s;
+    box-shadow: 0 6px 24px rgba(0,0,0,.4);
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <span class="dot"></span>
+    <span class="title">无限画布</span>
+    <span class="status" id="status">正在检查…</span>
+    <span class="spacer"></span>
+    <button id="btnBrowser">在浏览器打开</button>
+    <button id="btnReload">重载</button>
+    <button class="primary" id="btnSave">保存配置</button>
+  </header>
+
+  <div class="cfg">
+    <label>接口地址</label>
+    <input id="baseUrl" placeholder="https://img.mzfe.de/v1" />
+    <label>API Key</label>
+    <input id="apiKey" type="password" placeholder="sk-…" />
+    <label>输出目录</label>
+    <input id="outputDir" style="width:250px" placeholder="留空 = 桌面\无限画布出图" />
+  </div>
+
+  <div id="frame">
+    <webview id="cv" src="https://canvas.zikl.dev" allowpopups></webview>
+    <div class="overlay" id="overlay">
+      <h2>画布没能嵌进来…</h2>
+      <p id="overlayMsg">可能是网络原因或站点不允许嵌入。点击下面的按钮在系统浏览器里打开，功能完全一样。</p>
+      <button class="primary" id="btnBrowser2">用系统浏览器打开无限画布</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+  const { ipcRenderer, shell } = require("electron");
+  const CANVAS_URL = "https://canvas.zikl.dev";
+
+  const $ = (id) => document.getElementById(id);
+  const cv = $("cv");
+
+  function toast(msg) {
+    const t = $("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    setTimeout(() => t.classList.remove("show"), 1800);
+  }
+
+  function showOverlay(msg) {
+    if (msg) $("overlayMsg").textContent = msg;
+    $("overlay").classList.add("show");
+  }
+
+  /* ---- 拉取当前配置 ---- */
+  async function loadConfig() {
+    try {
+      const cfg = await ipcRenderer.invoke("plugin:infinite-canvas:get-config");
+      $("baseUrl").value = cfg.baseUrl || "";
+      $("apiKey").value = cfg.apiKey || "";
+      $("outputDir").value = cfg.outputDir || "";
+    } catch (e) {
+      /* 保持空值 */
+    }
+  }
+
+  /* ---- 拉取状态 ---- */
+  async function loadStatus() {
+    $("status").textContent = "正在检查接口…";
+    try {
+      const s = await ipcRenderer.invoke("plugin:infinite-canvas:status");
+      $("status").textContent =
+        (s.hasKey ? "已配置密钥" : "未配置密钥（工具调用会提示）") +
+        (s.modelCount != null ? " · 模型 " + s.modelCount + " 个" : " · 接口未连通");
+    } catch (e) {
+      $("status").textContent = "状态检查失败";
+    }
+  }
+
+  /* ---- 保存配置 ---- */
+  $("btnSave").onclick = async () => {
+    try {
+      await ipcRenderer.invoke("plugin:infinite-canvas:save-config", {
+        baseUrl: $("baseUrl").value.trim(),
+        apiKey: $("apiKey").value.trim(),
+        outputDir: $("outputDir").value.trim(),
+      });
+      toast("配置已保存 ♪");
+      loadStatus();
+    } catch (e) {
+      toast("保存失败：" + e.message);
+    }
+  };
+
+  /* ---- 外部浏览器 ---- */
+  async function openExternal() {
+    try {
+      await ipcRenderer.invoke("plugin:infinite-canvas:open-external", CANVAS_URL);
+    } catch (e) {
+      try { shell.openExternal(CANVAS_URL); } catch (_) {}
+    }
+  }
+  $("btnBrowser").onclick = openExternal;
+  $("btnBrowser2").onclick = openExternal;
+
+  /* ---- 重载 webview ---- */
+  $("btnReload").onclick = () => {
+    $("overlay").classList.remove("show");
+    try { cv.reload(); } catch (_) { location.reload(); }
+  };
+
+  /* ---- webview 事件兜底 ---- */
+  if (cv) {
+    cv.addEventListener("did-fail-load", (e) => {
+      if (e && e.errorCode === -3) return; // 主动取消，忽略
+      showOverlay("加载 canvas.zikl.dev 失败（错误码 " + (e && e.errorCode) + "）。可以先用系统浏览器打开。");
+    });
+    cv.addEventListener("did-finish-load", () => {
+      $("overlay").classList.remove("show");
+    });
+  }
+
+  /* ---- 启动 ---- */
+  loadConfig();
+  loadStatus();
+  setInterval(loadStatus, 20000);
+</script>
+</body>
+</html>

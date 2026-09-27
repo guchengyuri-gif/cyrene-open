@@ -1,0 +1,10 @@
+{
+  "apiVersion": 1,
+  "id": "computer-use",
+  "name": "Computer Use (桌面操控)",
+  "version": "1.0.0",
+  "description": "Windows 桌面自动化操控插件：支持屏幕截取、鼠标点击与移动、滚轮控制、键盘输入与快捷键。",
+  "author": "昔涟",
+  "entry": "index.cjs",
+  "defaultEnabled": false
+}

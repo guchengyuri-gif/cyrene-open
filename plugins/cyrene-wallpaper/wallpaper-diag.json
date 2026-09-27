@@ -1,0 +1,80 @@
+[
+  {
+    "at": 1789633493771,
+    "action": "apply",
+    "winId": 2,
+    "mode": "glass",
+    "label": "全透明玻璃",
+    "result": {
+      "ok": true,
+      "mode": "glass",
+      "rootFound": true
+    }
+  },
+  {
+    "at": 1789634300915,
+    "action": "off",
+    "winId": 2
+  },
+  {
+    "at": 1789634301117,
+    "action": "apply",
+    "winId": 2,
+    "mode": "glass",
+    "label": "全透明玻璃",
+    "result": {
+      "ok": true,
+      "mode": "glass",
+      "rootFound": true
+    }
+  },
+  {
+    "at": 1789653637775,
+    "action": "apply",
+    "winId": 11,
+    "mode": "glass",
+    "label": "全透明玻璃",
+    "result": {
+      "ok": false,
+      "reason": "not-chat-window"
+    }
+  },
+  {
+    "at": 1789653637775,
+    "action": "apply",
+    "winId": 11,
+    "mode": "glass",
+    "label": "全透明玻璃",
+    "result": {
+      "ok": false,
+      "reason": "not-chat-window"
+    }
+  },
+  {
+    "at": 1789653704730,
+    "action": "off",
+    "winId": 2
+  },
+  {
+    "at": 1789653719062,
+    "action": "apply",
+    "winId": 12,
+    "mode": "glass",
+    "label": "全透明玻璃",
+    "result": {
+      "ok": false,
+      "reason": "not-chat-window"
+    }
+  },
+  {
+    "at": 1789653719062,
+    "action": "apply",
+    "winId": 12,
+    "mode": "glass",
+    "label": "全透明玻璃",
+    "result": {
+      "ok": false,
+      "reason": "not-chat-window"
+    }
+  }
+]

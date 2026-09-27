@@ -1,0 +1,11 @@
+{
+  "name": "带派API 图像生成 (Sunburst)",
+  "command": "node",
+  "args": [
+    "D:\\ai\\program\\mcp-servers\\deepsb-imagegen\\index.mjs"
+  ],
+  "env": {
+    "DEEPSB_API_KEY": "sk-06cfe5f96ef79845df653a1378df285bba984b2c42c746a051ea16d21b7ad0e2"
+  },
+  "cwd": "D:\\ai\\program\\mcp-servers\\deepsb-imagegen"
+}

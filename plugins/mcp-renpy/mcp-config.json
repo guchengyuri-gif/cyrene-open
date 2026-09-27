@@ -1,0 +1,12 @@
+{
+  "name": "renpy-mcp",
+  "command": "D:\\ai\\program\\renpy-mcp\\.venv\\Scripts\\python.exe",
+  "args": [
+    "-m",
+    "renpy_mcp.server"
+  ],
+  "env": {
+    "PYTHONPATH": "D:\\ai\\program\\renpy-mcp\\src"
+  },
+  "cwd": "D:\\ai\\program\\renpy-mcp"
+}

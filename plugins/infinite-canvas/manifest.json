@@ -1,0 +1,10 @@
+{
+  "apiVersion": 1,
+  "id": "infinite-canvas",
+  "name": "无限画布 Infinite Canvas",
+  "version": "1.0.0",
+  "description": "在 Cyrene 内直接打开「无限画布」创作站，并让昔涟调用 ZikL 生图接口出图 / 改图",
+  "author": "昔涟",
+  "entry": "index.cjs",
+  "icon": "icon.svg"
+}

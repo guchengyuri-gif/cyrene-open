@@ -1,0 +1,10 @@
+{
+  "apiVersion": 1,
+  "id": "create-plan",
+  "name": "Create Plan (分步规划硬刹车)",
+  "version": "1.0.0",
+  "description": "大任务执行前的“硬刹车”。强制在动工前梳理分步规划与验收指标，避免把项目全局改乱。",
+  "author": "昔涟",
+  "entry": "index.cjs",
+  "defaultEnabled": true
+}

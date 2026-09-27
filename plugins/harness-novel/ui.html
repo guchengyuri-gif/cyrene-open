@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<title>harnessNovel · 网文拆书重铸引擎</title>
+<style>
+  :root {
+    --pink: #ff7fb6;
+    --pink-soft: #ffd7e7;
+    --pink-bg: #fff7fb;
+    --ink: #3b2b33;
+    --ink-soft: #7d6a74;
+    --line: #ffe1ee;
+    --ok: #35b37e;
+    --warn: #e8a33d;
+    --bad: #e2586b;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Microsoft YaHei UI", "Microsoft YaHei", "Segoe UI", sans-serif;
+    background: var(--pink-bg);
+    color: var(--ink);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .wrap { padding: 16px 18px 26px; }
+  header {
+    display: flex; align-items: center; gap: 10px;
+    padding-bottom: 10px; border-bottom: 1px dashed var(--line);
+  }
+  header .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--pink); box-shadow: 0 0 8px var(--pink); }
+  header h1 { font-size: 15px; margin: 0; font-weight: 700; letter-spacing: .5px; }
+  header .sub { color: var(--ink-soft); font-size: 12px; margin-left: auto; }
+  section {
+    background: #fff; border: 1px solid var(--line); border-radius: 14px;
+    padding: 12px 14px; margin-top: 14px;
+    box-shadow: 0 2px 10px rgba(255, 143, 187, .07);
+  }
+  section > h2 {
+    font-size: 13px; margin: 0 0 10px; color: var(--pink);
+    display: flex; align-items: center; gap: 6px; font-weight: 700;
+  }
+  section > h2::before { content: "♪"; color: var(--pink-soft); }
+  label { display: block; font-size: 12px; color: var(--ink-soft); margin: 8px 0 3px; }
+  input[type=text], input[type=password], input[type=number] {
+    width: 100%; padding: 6px 9px; border: 1px solid var(--line);
+    border-radius: 9px; font-size: 12px; color: var(--ink); background: #fffcfe; outline: none;
+    font-family: inherit;
+  }
+  input:focus { border-color: var(--pink-soft); box-shadow: 0 0 0 3px rgba(255, 143, 187, .12); }
+  .row { display: flex; gap: 10px; }
+  .row > div { flex: 1; min-width: 0; }
+  button {
+    border: 1px solid var(--pink-soft); background: #fff;
+    color: var(--pink); border-radius: 9px; padding: 6px 13px;
+    font-size: 12px; cursor: pointer; font-family: inherit; transition: .15s;
+  }
+  button:hover { background: var(--pink-bg); }
+  button.primary { background: var(--pink); color: #fff; border-color: var(--pink); }
+  button.primary:hover { filter: brightness(1.05); }
+  button.ghost { border-style: dashed; color: var(--ink-soft); }
+  button:disabled { opacity: .5; cursor: not-allowed; }
+  .btns { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  th, td { text-align: left; padding: 5px 6px; border-bottom: 1px solid var(--line); }
+  th { color: var(--ink-soft); font-weight: 500; }
+  .badge { display: inline-block; padding: 1px 7px; border-radius: 20px; font-size: 11px; }
+  .badge.ok { background: #e6f7ef; color: var(--ok); }
+  .badge.bad { background: #fdeaee; color: var(--bad); }
+  .badge.warn { background: #fdf3e2; color: var(--warn); }
+  .kv { display: flex; justify-content: space-between; gap: 10px; padding: 3px 0; font-size: 12px; }
+  .kv span:first-child { color: var(--ink-soft); }
+  .kv code, code {
+    font-family: Consolas, "Courier New", monospace; font-size: 11.5px;
+    background: #fff4f9; padding: 1px 5px; border-radius: 5px; word-break: break-all;
+  }
+  .hint { color: var(--ink-soft); font-size: 11.5px; margin-top: 6px; }
+  pre {
+    background: #2c2530; color: #ffd9ea; border-radius: 10px; padding: 10px;
+    font-size: 11px; max-height: 220px; overflow: auto; white-space: pre-wrap; word-break: break-all;
+    font-family: Consolas, monospace;
+  }
+  .toast {
+    position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%);
+    background: var(--ink); color: #fff; padding: 8px 18px; border-radius: 20px;
+    font-size: 12px; opacity: 0; pointer-events: none; transition: .25s;
+    max-width: 90%; text-align: center;
+  }
+  .toast.show { opacity: .93; }
+  .role-title { font-size: 12px; color: var(--pink); margin-top: 12px; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="dot"></span>
+    <h1>harnessNovel · 网文拆书重铸引擎</h1>
+    <span class="sub" id="verLabel">—</span>
+  </header>
+
+  <section>
+    <h2>运行环境</h2>
+    <div class="kv"><span>Python 解释器</span><span id="pyLabel"><code>检测中…</code></span></div>
+    <div class="kv"><span>harnessNovel 包</span><span id="pkgLabel">检测中…</span></div>
+    <div class="kv"><span>全局配置</span><span id="envLabel"><code>—</code></span></div>
+    <div class="btns">
+      <button id="btnRefresh" class="ghost">重新检测</button>
+      <button id="btnInstall" class="primary" style="display:none">一键安装 harnessNovel</button>
+      <button id="btnOpenEnv" class="ghost">打开配置目录</button>
+    </div>
+    <div class="hint">拆书 / 全书设计 / 正文生成都需要可用的模型 API；请在下方的「模型与密钥」里填写。</div>
+  </section>
+
+  <section>
+    <h2>基础设置</h2>
+    <div class="row">
+      <div>
+        <label>工作区根目录（小说都放在这里）</label>
+        <input type="text" id="workspaceRoot" placeholder="D:\ai\program\my-novels" />
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <label>Python 路径（留空则自动探测 py / python）</label>
+        <input type="text" id="pythonPath" placeholder="自动探测" />
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <label>Web 工作台监听地址</label>
+        <input type="text" id="webHost" placeholder="127.0.0.1" />
+      </div>
+      <div>
+        <label>端口</label>
+        <input type="number" id="webPort" placeholder="8765" />
+      </div>
+    </div>
+    <div class="btns">
+      <button class="primary" id="btnSaveBase">保存基础设置</button>
+      <button class="ghost" id="btnOpenRoot">打开工作区目录</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>模型与密钥</h2>
+    <div id="roles"></div>
+    <div class="btns">
+      <button class="primary" id="btnSaveEnv">保存模型配置（写入 .env）</button>
+    </div>
+    <div class="hint">
+      三组模型分工不同：拆书与正文用便宜的 flash 模型即可，全书设计建议用更强的 pro 模型。<br />
+      Key 会明文写入 <code id="envPathHint">~/.harnessNovel/.env</code>，与 CLI / Web 工作台共用同一份配置。
+    </div>
+  </section>
+
+  <section>
+    <h2>Web 工作台</h2>
+    <div class="kv"><span>状态</span><span id="webLabel"><span class="badge bad">未运行</span></span></div>
+    <div class="btns">
+      <button class="primary" id="btnWebStart">启动</button>
+      <button id="btnWebOpen">在浏览器打开</button>
+      <button class="ghost" id="btnWebStop">停止</button>
+    </div>
+    <div class="hint">工作台支持对全书设计、舞台、故事情节、章纲与正文做多轮对话式调节，确认满意后再写入文件。</div>
+  </section>
+
+  <section>
+    <h2>工作区与后台任务</h2>
+    <table>
+      <thead><tr><th>工作区</th><th>参考书</th><th>设计</th><th>章节</th></tr></thead>
+      <tbody id="wsBody"><tr><td colspan="4" style="color:#7d6a74">加载中…</td></tr></tbody>
+    </table>
+    <div style="margin-top:12px">
+      <table>
+        <thead><tr><th>后台任务</th><th>状态</th><th></th></tr></thead>
+        <tbody id="jobBody"><tr><td colspan="3" style="color:#7d6a74">暂无</td></tr></tbody>
+      </table>
+    </div>
+    <pre id="jobLog" style="display:none"></pre>
+  </section>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const { ipcRenderer } = require("electron");
+const CH = (name, payload) => ipcRenderer.invoke("plugin:harness-novel:" + name, payload);
+
+const ROLE_LABELS = {
+  dataBuilder: "参考小说故事情节单元提取（init 拆书，建议 flash）",
+  adaptiveBuilder: "全书设计与舞台设计（建议 pro）",
+  adaptiveLite: "故事节情/章纲/正文与轻量任务（建议 flash）",
+};
+
+function toast(msg) {
+  const el = document.getElementById("toast");
+  el.textContent = msg;
+  el.classList.add("show");
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.classList.remove("show"), 2600);
+}
+
+function esc(s) {
+  return String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+}
+
+let state = null;
+
+function renderRoles(env) {
+  const box = document.getElementById("roles");
+  const roles = ["dataBuilder", "adaptiveBuilder", "adaptiveLite"];
+  box.innerHTML = roles
+    .map((r) => {
+      const v = (env && env[r]) || {};
+      return (
+        '<div class="role-title">' + esc(ROLE_LABELS[r]) + "</div>" +
+        '<div class="row">' +
+          '<div><label>模型名</label><input type="text" data-role="' + r + '" data-field="model" value="' + esc(v.model || "") + '" placeholder="deepseek-v4-flash" /></div>' +
+          '<div><label>API 地址</label><input type="text" data-role="' + r + '" data-field="baseUrl" value="' + esc(v.baseUrl || "") + '" placeholder="https://api.deepseek.com" /></div>' +
+        "</div>" +
+        '<label>API Key' + (v.hasKey ? "（已保存：" + esc(v.apiKeyMasked) + "）" : "") + "</label>" +
+        '<input type="password" data-role="' + r + '" data-field="apiKey" placeholder="' + (v.hasKey ? "已保存，留空则不修改" : "sk-...") + '" />'
+      );
+    })
+    .join("");
+}
+
+function renderJobs(jobs) {
+  const tb = document.getElementById("jobBody");
+  if (!jobs || !jobs.length) {
+    tb.innerHTML = '<tr><td colspan="3" style="color:#7d6a74">暂无后台任务</td></tr>';
+    return;
+  }
+  tb.innerHTML = jobs
+    .map((j) => {
+      const badge = j.status === "running" ? "warn" : j.status === "done" ? "ok" : "bad";
+      return (
+        "<tr><td>" + esc(j.label) + "</td>" +
+        '<td><span class="badge ' + badge + '">' + esc(j.status) + "</span></td>" +
+        '<td><button class="ghost" data-log="' + esc(j.id) + '">看日志</button></td></tr>'
+      );
+    })
+    .join("");
+  tb.querySelectorAll("[data-log]").forEach((b) => {
+    b.onclick = async () => {
+      const r = await CH("tailJob", b.getAttribute("data-log"));
+      const pre = document.getElementById("jobLog");
+      pre.style.display = "block";
+      pre.textContent = r && r.ok ? r.text || "(空)" : "读取失败：" + ((r && r.error) || "");
+    };
+  });
+}
+
+function render(st) {
+  state = st;
+  document.getElementById("verLabel").textContent = st.package && st.package.installed ? "v" + st.package.version : "";
+
+  document.getElementById("pyLabel").innerHTML = st.python && st.python.path
+    ? "<code>" + esc(st.python.path) + "</code>"
+    : '<span class="badge bad">未找到 Python</span>';
+
+  const pkgEl = document.getElementById("pkgLabel");
+  if (st.package && st.package.installed) {
+    pkgEl.innerHTML = '<span class="badge ok">已安装 v' + esc(st.package.version) + "</span>";
+    document.getElementById("btnInstall").style.display = "none";
+  } else {
+    pkgEl.innerHTML = '<span class="badge bad">未安装</span>';
+    document.getElementById("btnInstall").style.display = "inline-block";
+  }
+
+  document.getElementById("envLabel").innerHTML = st.envFileExists
+    ? '<span class="badge ok">已生成</span>'
+    : '<span class="badge warn">未生成</span>';
+  document.getElementById("envPathHint").textContent = st.envFilePath || "~/.harnessNovel/.env";
+
+  const c = st.config || {};
+  const inputs = {
+    workspaceRoot: "workspaceRoot",
+    pythonPath: "pythonPath",
+    webHost: "webHost",
+    webPort: "webPort",
+  };
+  Object.keys(inputs).forEach((k) => {
+    const el = document.getElementById(inputs[k]);
+    if (el && document.activeElement !== el) el.value = c[k] == null ? "" : c[k];
+  });
+
+  renderRoles(st.env || {});
+
+  const web = st.web || {};
+  document.getElementById("webLabel").innerHTML = web.running
+    ? '<span class="badge ok">运行中</span> <code>' + esc(web.url) + "</code>"
+    : '<span class="badge bad">未运行</span>';
+  document.getElementById("btnWebStart").disabled = !!web.running;
+  document.getElementById("btnWebStop").disabled = !web.running;
+
+  const tb = document.getElementById("wsBody");
+  const ws = st.workspace || {};
+  if (!ws.items || !ws.items.length) {
+    tb.innerHTML = '<tr><td colspan="4" style="color:#7d6a74">还没有工作区，让昔涟帮你创建第一本吧♪</td></tr>';
+  } else {
+    tb.innerHTML = ws.items
+      .map((i) =>
+        "<tr><td>" + esc(i.name) + "</td><td>" + (i.hasReference ? "✅" : "—") + "</td><td>" +
+        (i.hasDesign ? "✅" : "—") + "</td><td>" + i.chapterFiles + "</td></tr>")
+      .join("");
+  }
+
+  renderJobs(st.jobs || []);
+}
+
+async function refresh(showToast) {
+  try {
+    const st = await CH("getState");
+    render(st);
+    if (showToast) toast("已刷新♪");
+  } catch (e) {
+    toast("读取状态失败");
+  }
+}
+
+function collectBase() {
+  const patch = {};
+  patch.workspaceRoot = document.getElementById("workspaceRoot").value.trim();
+  patch.pythonPath = document.getElementById("pythonPath").value.trim();
+  patch.webHost = document.getElementById("webHost").value.trim();
+  const port = Number(document.getElementById("webPort").value);
+  if (port) patch.webPort = port;
+  return patch;
+}
+
+function collectEnv() {
+  const env = {};
+  document.querySelectorAll("[data-role]").forEach((el) => {
+    const role = el.getAttribute("data-role");
+    const field = el.getAttribute("data-field");
+    env[role] = env[role] || {};
+    const val = el.value.trim();
+    if (field === "apiKey" && !val) return; // 留空表示不修改
+    env[role][field] = val;
+  });
+  return env;
+}
+
+document.getElementById("btnRefresh").onclick = () => refresh(true);
+
+document.getElementById("btnInstall").onclick = async () => {
+  const btn = document.getElementById("btnInstall");
+  btn.disabled = true;
+  btn.textContent = "安装中…（可能需数分钟）";
+  const r = await CH("installPackage");
+  btn.disabled = false;
+  btn.textContent = "一键安装 harnessNovel";
+  toast(r && r.ok ? "安装成功♪" : "安装失败，请查看提示");
+  if (r && !r.ok) alert("安装失败：\n" + (r.error || ""));
+  refresh(false);
+};
+
+document.getElementById("btnOpenEnv").onclick = async () => {
+  const r = await CH("openFolder", "env");
+  if (!r || !r.ok) toast("打开失败");
+};
+
+document.getElementById("btnOpenRoot").onclick = async () => {
+  const r = await CH("openFolder", "root");
+  if (!r || !r.ok) toast("打开失败");
+};
+
+document.getElementById("btnSaveBase").onclick = async () => {
+  await CH("saveConfig", collectBase());
+  toast("基础设置已保存♪");
+  refresh(false);
+};
+
+document.getElementById("btnSaveEnv").onclick = async () => {
+  const r = await CH("saveConfig", { env: collectEnv() });
+  toast(r && r.ok ? "模型配置已写入 .env♪" : "保存失败");
+  refresh(false);
+};
+
+document.getElementById("btnWebStart").onclick = async () => {
+  const btn = document.getElementById("btnWebStart");
+  btn.disabled = true;
+  btn.textContent = "启动中…";
+  const r = await CH("startWeb");
+  btn.textContent = "启动";
+  toast(r && r.ok ? "工作台已就绪：" + r.url : "启动失败");
+  if (r && !r.ok) alert("启动失败：\n" + (r.error || ""));
+  refresh(false);
+};
+
+document.getElementById("btnWebOpen").onclick = async () => {
+  const r = await CH("openWeb");
+  if (r && r.ok) toast("已在浏览器打开：" + r.url);
+  else toast("打开失败");
+  refresh(false);
+};
+
+document.getElementById("btnWebStop").onclick = async () => {
+  await CH("stopWeb");
+  toast("已停止");
+  refresh(false);
+};
+
+ipcRenderer.on("plugin:harness-novel:progress", (_e, st) => render(st));
+
+refresh(false);
+setInterval(() => refresh(false), 6000);
+</script>
+</body>
+</html>

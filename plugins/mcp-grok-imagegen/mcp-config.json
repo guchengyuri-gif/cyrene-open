@@ -1,0 +1,8 @@
+{
+  "name": "Grok 2.0 图像生成与处理",
+  "command": "node",
+  "args": [
+    "D:\\ai\\program\\mcp-servers\\grok-imagegen\\index.mjs"
+  ],
+  "cwd": "D:\\ai\\program\\mcp-servers\\grok-imagegen"
+}

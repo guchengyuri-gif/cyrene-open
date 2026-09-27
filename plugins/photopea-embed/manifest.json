@@ -1,0 +1,10 @@
+{
+  "apiVersion": 1,
+  "id": "photopea-embed",
+  "name": "Photopea 图像编辑器",
+  "version": "0.1.0",
+  "description": "在 Cyrene 里一键打开 Photopea（免费网页版 Photoshop），可把本地图片直接送进窗口编辑",
+  "author": "Cyrene",
+  "entry": "index.cjs",
+  "defaultEnabled": false
+}

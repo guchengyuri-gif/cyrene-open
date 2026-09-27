@@ -1,0 +1,14 @@
+{
+  "name": "Playwright 浏览器",
+  "command": "C:\\Users\\ADMIN\\AppData\\Local\\Programs\\Cyrene\\Cyrene.exe",
+  "args": [
+    "C:\\Users\\ADMIN\\AppData\\Local\\Programs\\Cyrene\\resources\\app.asar.unpacked\\node_modules\\@playwright\\mcp\\cli.js",
+    "--isolated",
+    "--headless",
+    "--browser",
+    "msedge"
+  ],
+  "env": {
+    "ELECTRON_RUN_AS_NODE": "1"
+  }
+}

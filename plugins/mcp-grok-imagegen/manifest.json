@@ -1,0 +1,9 @@
+{
+  "apiVersion": 1,
+  "id": "mcp-grok-imagegen",
+  "name": "Grok 2.0 图像生成",
+  "version": "1.0.0",
+  "description": "Grok 2.0 Imagine 图像生成与处理（自带抠图、2K 放大）。用户要画图/生图/透明立绘时启用。",
+  "author": "昔涟",
+  "entry": "index.cjs"
+}

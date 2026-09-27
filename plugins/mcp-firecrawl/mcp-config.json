@@ -1,0 +1,11 @@
+{
+  "name": "Firecrawl (精简核心版)",
+  "command": "node",
+  "args": [
+    "D:\\ai\\program\\mcp-servers\\firecrawl-lite\\index.mjs"
+  ],
+  "env": {
+    "FIRECRAWL_API_KEY": "fc-b76a1195f3024921aa85a3b4e3ad3428"
+  },
+  "cwd": "D:\\ai\\program\\mcp-servers\\firecrawl-lite"
+}

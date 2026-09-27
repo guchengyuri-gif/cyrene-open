@@ -1,0 +1,13 @@
+'use strict';
+const fs = require('fs');
+const p = 'D:/下载/芙宁娜免费模型/芙宁娜免费模型/芙宁娜（vts）/芙宁娜.cdi3.json';
+const j = JSON.parse(fs.readFileSync(p, 'utf8'));
+console.log('top keys:', Object.keys(j).join(', '));
+const ps = (j.Parameters || []).map((x) => x.Id);
+console.log('param count:', ps.length);
+console.log('has ParamEyeLOpen:', ps.includes('ParamEyeLOpen'));
+console.log('has ParamEyeROpen:', ps.includes('ParamEyeROpen'));
+console.log('has ParamMouthOpenY:', ps.includes('ParamMouthOpenY'));
+console.log('has ParamMouthForm:', ps.includes('ParamMouthForm'));
+console.log('has ParamBreath:', ps.includes('ParamBreath'));
+console.log('eye/mouth related:', ps.filter((x) => /Eye|Mouth/i.test(x)).join(', '));

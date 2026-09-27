@@ -1,0 +1,10 @@
+{
+  "apiVersion": 1,
+  "id": "grill-me",
+  "name": "Grill Me (反向提问决策树)",
+  "version": "1.0.0",
+  "description": "当需求模糊时，主动向你提出关键澄清问题（边界条件、异常处理、架构偏好），在动工前把所有暗坑理清。",
+  "author": "昔涟",
+  "entry": "index.cjs",
+  "defaultEnabled": true
+}

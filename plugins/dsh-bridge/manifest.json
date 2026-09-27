@@ -1,0 +1,9 @@
+{
+  "apiVersion": 1,
+  "id": "dsh-bridge",
+  "name": "DSH 协作桥",
+  "version": "0.2.1",
+  "description": "让昔涟与本机的 DSH Desktop 协作：观测 DSH 运行状态、通过 agents-anywhere connector 控制面下发指令、并通过共享信箱与 DSH 双向留言（收件只读、已读与归档分离；头部围栏缺失时显式报警）。",
+  "author": "ADMIN",
+  "entry": "index.cjs"
+}

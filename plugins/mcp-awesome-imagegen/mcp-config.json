@@ -1,0 +1,8 @@
+{
+  "name": "Awesome 提示词引擎 (GPT-Image2)",
+  "command": "node",
+  "args": [
+    "D:\\ai\\program\\mcp-servers\\awesome-imagegen\\index.mjs"
+  ],
+  "cwd": "D:\\ai\\program\\mcp-servers\\awesome-imagegen"
+}

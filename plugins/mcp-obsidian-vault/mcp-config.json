@@ -1,0 +1,8 @@
+{
+  "name": "Obsidian 知识库连接器",
+  "command": "node",
+  "args": [
+    "D:\\ai\\program\\mcp-servers\\obsidian-vault\\index.mjs"
+  ],
+  "cwd": "D:\\ai\\program\\mcp-servers\\obsidian-vault"
+}

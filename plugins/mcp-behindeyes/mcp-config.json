@@ -1,0 +1,8 @@
+{
+  "name": "BehindEyes (小说转视觉小说)",
+  "command": "D:\\ai\\program\\BehindEyes\\novel-vn\\backend\\venv\\Scripts\\python.exe",
+  "args": [
+    "D:\\ai\\program\\mcp-servers\\behindeyes\\server.py"
+  ],
+  "cwd": "D:\\ai\\program\\BehindEyes\\novel-vn\\backend"
+}

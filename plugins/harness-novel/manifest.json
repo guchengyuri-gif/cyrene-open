@@ -1,0 +1,10 @@
+{
+  "apiVersion": 1,
+  "id": "harness-novel",
+  "name": "harnessNovel (网文拆书重铸引擎)",
+  "version": "1.0.0",
+  "description": "基于 XTmingyue/harnessNovel 的长篇网络小说写作 AI Agent 插件。支持优质网文拆书逆向工程、故事单元提取、机制与舞台路线图设计、逐卷逐章生成及本地可视化 Web UI 工作台服务管控。",
+  "author": "昔涟",
+  "entry": "index.cjs",
+  "defaultEnabled": true
+}

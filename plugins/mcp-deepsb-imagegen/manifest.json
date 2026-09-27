@@ -1,0 +1,9 @@
+{
+  "apiVersion": 1,
+  "id": "mcp-deepsb-imagegen",
+  "name": "带派API 图像生成",
+  "version": "1.0.0",
+  "description": "带派 API（nb.deepsb.com）的 GPT-Image 生成与编辑。要生图/改图且走带派通道时启用。",
+  "author": "昔涟",
+  "entry": "index.cjs"
+}

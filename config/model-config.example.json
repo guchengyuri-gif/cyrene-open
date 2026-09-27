@@ -1,0 +1,22 @@
+{
+  "_comment": "复制本文件为 model-config.json 并填入真实 API Key。切勿提交 model-config.json。",
+  "providers": [
+    {
+      "id": "deepseek",
+      "name": "DeepSeek",
+      "baseUrl": "https://api.deepseek.com/v1",
+      "apiKey": "sk-your-key-here",
+      "models": ["deepseek-chat", "deepseek-reasoner"],
+      "contextWindowTokens": 256000
+    },
+    {
+      "id": "openai-compatible",
+      "name": "OpenAI Compatible",
+      "baseUrl": "https://api.example.com/v1",
+      "apiKey": "sk-your-key-here",
+      "models": ["your-model-name"],
+      "contextWindowTokens": 1000000
+    }
+  ],
+  "defaultModel": "deepseek/deepseek-chat"
+}

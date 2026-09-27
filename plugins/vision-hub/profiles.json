@@ -1,0 +1,14 @@
+{
+  "healthTestImage": "",
+  "profiles": [
+    {
+      "name": "glm-x5m5x",
+      "baseUrl": "https://api.x5m5x.com/v1",
+      "apiKey": "sk-483f41a3020e4b59ab58a335e7f8fd912f",
+      "model": "glm-5.3-flash",
+      "enabled": true,
+      "priority": 1,
+      "timeoutMs": 60000
+    }
+  ]
+}

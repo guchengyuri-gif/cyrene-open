@@ -1,0 +1,9 @@
+{
+  "apiVersion": 1,
+  "id": "mcp-obsidian-vault",
+  "name": "Obsidian 知识库连接器",
+  "version": "1.0.0",
+  "description": "读写本地 Obsidian 知识库的 MCP（读笔记/写笔记/搜索）。整理笔记与知识库时启用。",
+  "author": "昔涟",
+  "entry": "index.cjs"
+}

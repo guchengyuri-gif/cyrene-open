@@ -1,0 +1,9 @@
+{
+  "apiVersion": 1,
+  "id": "mcp-repomix",
+  "name": "Repomix 仓库打包",
+  "version": "1.0.0",
+  "description": "把代码仓库打包成单文件供 AI 阅读的 MCP。分析大代码库时启用（首次会自动 npx 下载）。",
+  "author": "昔涟",
+  "entry": "index.cjs"
+}

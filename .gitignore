@@ -1,62 +1,57 @@
-# Dependencies
+# 构建与依赖
 node_modules/
+dist/
+build/
 __pycache__/
+.venv/
+venv/
+.cache/
 *.pyc
 
-# Build artifacts
-out/
-dist/
-*.asar
-*.asar.bak
-*.asar.unpacked
-*.blockmap
-
-# Environment / secrets
-.env
-.env.local
-.env.*.local
-config/model-config.json
-config/image_channels.json
-config/*.key
-config/*.pem
-config/*.p12
-
-# IDE / OS
-.vscode/
-.idea/
-*.swp
-*.swo
-.DS_Store
-Thumbs.db
-desktop.ini
-
-# Logs
-*.log
-*.log.*
-logs/
-
-# Temp
-tmp/
-_tmp/
-*.tmp
+# 备份与临时
 *.bak
-*.backup
+*.bak-*
+*.orig
+*.tmp
+*.log
 
-# Large binaries
+# 大文件 / 二进制
+*.asar
+*.asar.before-*
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.mp3
+*.mp4
+*.wav
+*.ogg
 *.exe
-*.msi
+*.dll
+*.bin
+*.dat
+*.pak
+*.zip
 *.7z
 *.rar
-*.zip
-!plugins/**/*.zip
+*.mo
+*.msi
 
-# Model files (too large for git)
-*.model3.json
-*.moc3
-*.physics3.json
-*.204
-*.204.json
-Live2D_*/
+# 本地配置（含密钥，勿提交）
+config/model-config.json
+config/image_channels.json
+mcp-servers.json
+*-settings.json
+!config/*.example.json
 
-# Generated docs
-docs/generated/
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# cyrene-furina 构建产物
+cyrene-furina/backup/
+cyrene-furina/out/
+cyrene-furina/work/
+cyrene-furina/stage/
+cyrene-furina/lab/

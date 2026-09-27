@@ -1,0 +1,9 @@
+{
+  "apiVersion": 1,
+  "id": "mcp-awesome-imagegen",
+  "name": "Awesome 提示词引擎",
+  "version": "1.0.0",
+  "description": "GPT-Image2 工业级提示词模板库 MCP（检索模板/构造提示词）。生图前构造提示词时启用。",
+  "author": "昔涟",
+  "entry": "index.cjs"
+}

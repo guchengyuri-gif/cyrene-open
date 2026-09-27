@@ -1,0 +1,13 @@
+{
+  "_comment": "复制本文件为 image_channels.json 并填入真实 API Key。imagegen MCP 服务（mcp-deepsb-imagegen 等）读取此文件。",
+  "channels": [
+    {
+      "id": "deepsb",
+      "name": "带派 API (GPT-Image)",
+      "baseUrl": "https://api.nb.deepsb.com/v1",
+      "apiKey": "your-key-here",
+      "models": ["gpt-image-2.5-sunburst", "gpt-image-2.5-flare", "gpt-image-2"],
+      "enabled": true
+    }
+  ]
+}

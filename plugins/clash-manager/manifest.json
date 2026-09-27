@@ -1,0 +1,10 @@
+{
+  "apiVersion": 1,
+  "id": "clash-manager",
+  "name": "Clash Verge 管理器",
+  "version": "1.0.0",
+  "description": "按需启动/停止/探测 Clash Verge，不用手动开窗口",
+  "author": "Xilian for ADMIN",
+  "entry": "index.cjs",
+  "defaultEnabled": false
+}

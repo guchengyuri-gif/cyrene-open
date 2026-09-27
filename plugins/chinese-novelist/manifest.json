@@ -1,0 +1,10 @@
+{
+  "apiVersion": 1,
+  "id": "chinese-novelist",
+  "name": "Chinese Novelist (中文长篇小说创作助手)",
+  "version": "2.0.0",
+  "description": "基于 PenglongHuang/chinese-novelist-skill 的工业级中文长篇小说创作插件。三层递进问答、大纲与人物档案规划、偏好跨项目记忆、断点续写、章尾悬念钩子十三式、去 AI 味深度质检与字数校验修复。",
+  "author": "PenglongHuang / 昔涟适配",
+  "entry": "index.cjs",
+  "defaultEnabled": true
+}

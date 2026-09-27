@@ -1,0 +1,10 @@
+{
+  "apiVersion": 1,
+  "id": "paper-search-mcp",
+  "name": "Paper Search (学术文献检索)",
+  "version": "1.0.0",
+  "description": "基于 paper-search-mcp-openai 的学术文献与论文检索下载插件。支持 arXiv、PubMed、bioRxiv、medRxiv、Google Scholar 等多源搜索与全文提取。",
+  "author": "adamamer20 / Cyrene Adapter",
+  "entry": "index.cjs",
+  "defaultEnabled": true
+}

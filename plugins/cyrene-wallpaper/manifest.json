@@ -1,0 +1,10 @@
+{
+  "apiVersion": 1,
+  "id": "cyrene-wallpaper",
+  "name": "Cyrene 聊天窗壁纸",
+  "version": "1.0.0",
+  "description": "Cyrene 聊天窗背景插件：① 全透明玻璃板模式（窗体透明 + 毛玻璃模糊，露出真实桌面，可透出 Wallpaper Engine 实时壁纸）；② 壁纸模式（铺一张动态壁纸在窗体背后，两档遮罩）。基于透明窗体 + executeJavaScript 注入，不改 Cyrene 本体。素材默认用 DSH 的「流萤&萨姆」预览图，可替换插件目录内的 wallpaper.gif。",
+  "author": "昔涟",
+  "entry": "index.cjs",
+  "defaultEnabled": false
+}

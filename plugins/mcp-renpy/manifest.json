@@ -1,0 +1,9 @@
+{
+  "apiVersion": 1,
+  "id": "mcp-renpy",
+  "name": "renpy-mcp",
+  "version": "1.0.0",
+  "description": "Ren'Py 视觉小说工程 MCP（脚本生成、工程校验）。做视觉小说/AVG 项目时启用。",
+  "author": "昔涟",
+  "entry": "index.cjs"
+}

@@ -1,0 +1,9 @@
+{
+  "apiVersion": 1,
+  "id": "progress-inject",
+  "name": "项目进度注入",
+  "version": "1.4.1",
+  "description": "自动把各项目的进度文件（PROGRESS.md / PROGRESS_*.md）注入每轮上下文：话题命中关键词时加载全文，否则只给一份简短索引。新开对话也不会忘记项目进度。进度文件变化后自动提交到各自仓库；没有自己远程仓库的项目会发布到共享进度库（github.com/guchengyuri-gif/project）。写入或外部改动进度文件时，会弹一个 Windows 桌面通知气泡提醒。",
+  "author": "ADMIN",
+  "entry": "index.cjs"
+}

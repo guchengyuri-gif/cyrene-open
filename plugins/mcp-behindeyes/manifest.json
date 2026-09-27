@@ -1,0 +1,9 @@
+{
+  "apiVersion": 1,
+  "id": "mcp-behindeyes",
+  "name": "BehindEyes 小说转视觉小说",
+  "version": "1.0.0",
+  "description": "小说章节拆分与视觉小说剧本改写 MCP。把小说改编成 Ren'Py 剧本时启用。",
+  "author": "昔涟",
+  "entry": "index.cjs"
+}
