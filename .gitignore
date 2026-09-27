@@ -1,0 +1,62 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+
+# Build artifacts
+out/
+dist/
+*.asar
+*.asar.bak
+*.asar.unpacked
+*.blockmap
+
+# Environment / secrets
+.env
+.env.local
+.env.*.local
+config/model-config.json
+config/image_channels.json
+config/*.key
+config/*.pem
+config/*.p12
+
+# IDE / OS
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+*.log.*
+logs/
+
+# Temp
+tmp/
+_tmp/
+*.tmp
+*.bak
+*.backup
+
+# Large binaries
+*.exe
+*.msi
+*.7z
+*.rar
+*.zip
+!plugins/**/*.zip
+
+# Model files (too large for git)
+*.model3.json
+*.moc3
+*.physics3.json
+*.204
+*.204.json
+Live2D_*/
+
+# Generated docs
+docs/generated/
